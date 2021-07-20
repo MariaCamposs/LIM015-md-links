@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const marked = require('marked');
 const fetch = require('node-fetch');
 
 // Resolver si la ruta es relativa
@@ -9,7 +8,7 @@ const absolutePath = (filePath) => (path.isAbsolute(filePath) ? paths : path.res
 // Valida si archivo existe
 const validPath = (filePath) => fs.existsSync(filePath);
 
-getMdFiles = (filePath) => {
+const getMdFiles = (filePath) => {
     const elemArray = [];
     const infoPath = fs.statSync(filePath);
 
@@ -27,56 +26,54 @@ getMdFiles = (filePath) => {
     return elemArray;
 };
 
-getLinksMd = () => {
+const regx = /\[([\w\s\d.()]+)\]\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg;
+const regxLink = /\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg;
+const regxText = /\[([\w\s\d.()]+)\]/g;
+
+const getLinksMd = (filePath) => {
   let arrayLinks = [];
-  filePath.forEach((file) => {
-    const readFile = (filePath) => (fs.readFileSync(filePath, 'utf8'))
-    const renderer = new marked.Renderer();
-    renderer.link = (href, title, text) => {
-      const validHref = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/
-      if(validHref.test(href)){
-        const linkProperties = {
-          href,
-          text,
-          file
-        }
-      }
-      arrayLinks.push(linkProperties);
-    };
-    marked(readFile(file), { renderer });
+  filePath.forEach((myfile) => {
+    const readFile = fs.readFileSync(myfile, 'utf8');
+    const links = readFile.match(regx);
+    if(links){
+      links.forEach((link) => {
+        const myhref = link.match(regxLink).join().slice(1 , -1);
+        const mytext = link.match(regxText).join().slice(1 , -1);
+        const linksProperties = {
+          href: myhref,
+          text: mytext,
+          file: myfile,
+        };
+        return arrayLinks.push(linksProperties);
+      });
+    }
   });
-  return arrayLinks;
+    return arrayLinks;
 }
 
-statusLink = (arrayLinks) => {
-  const status = arrayLinks.map((elem) =>{
-    fetch(elem.href)
+const statusLink = (arrLinks) => fetch(arrLinks.href) 
     .then((res) => {
-      if(status.ok){
+      const mystatus = res.status;
+      const mymessage = res.status !== res.ok ? 'FAIL' : res.statusText;
         return {
-          ...arrayLinks,
-          status: res.ok,
-          message: message,
+          ...arrLinks,
+          status: mystatus,
+          message: mymessage,
         };
-      }
-    })
+      })
     .catch(() => {
       return {
-        ...arrayLinks,
-        status: res.status,
-        message: res.statusText,
+        ...arrLinks,
+        status: 'no status',
+        message: 'FAIL',
       }
-    })
-  })
-  return Promise.all(status);
-}
-
-console.log(statusLink('https://form.jotformeu.com/62361464969366'))
+    });
 
 module.exports = () => {
   absolutePath,
   validPath,
   getMdFiles,
   getLinksMd,
+  statusLink,
   statusLink
 };

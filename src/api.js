@@ -3,7 +3,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 
 // Resolver si la ruta es relativa
-const absolutePath = (filePath) => (path.isAbsolute(filePath) ? paths : path.resolve(filePath));
+const absolutePath = (filePath) => (path.isAbsolute(filePath) ? filePath : path.resolve(filePath));
 
 // Valida si archivo existe
 const validPath = (filePath) => fs.existsSync(filePath);
@@ -31,30 +31,28 @@ const regxLink = /\(((?:\/|https?:\/\/)[\w\d./?=#&_%~,.:-]+)\)/mg;
 const regxText = /\[([\w\s\d.()]+)\]/g;
 
 const getLinksMd = (filePath) => {
-  let arrayLinks = [];
-  filePath.forEach((myfile) => {
-    const readFile = fs.readFileSync(myfile, 'utf8');
-    const links = readFile.match(regx);
-    if(links){
+  const linksArr = [];
+    const fileRead = fs.readFileSync(filePath, 'utf-8');
+    const links = fileRead.match(regx);
+    if (links) {
       links.forEach((link) => {
-        const myhref = link.match(regxLink).join().slice(1 , -1);
-        const mytext = link.match(regxText).join().slice(1 , -1);
-        const linksProperties = {
+        const myhref = link.match(regxLink).join().slice(1, -1);
+        const mytext = link.match(regxText).join().slice(1, -1);
+        const linksObj = {
           href: myhref,
           text: mytext,
-          file: myfile,
+          file: filePath,
         };
-        return arrayLinks.push(linksProperties);
+        return linksArr.push(linksObj);
       });
     }
-  });
-    return arrayLinks;
-}
+  return linksArr.filter((elem) => elem !== undefined);
+};
 
 const statusLink = (arrLinks) => fetch(arrLinks.href) 
     .then((res) => {
       const mystatus = res.status;
-      const mymessage = res.status !== res.ok ? 'FAIL' : res.statusText;
+      const mymessage = res.status !== 200 ? 'FAIL' : res.statusText;
         return {
           ...arrLinks,
           status: mystatus,
@@ -69,7 +67,7 @@ const statusLink = (arrLinks) => fetch(arrLinks.href)
       }
     });
 
-module.exports = () => {
+module.exports = {
   absolutePath,
   validPath,
   getMdFiles,

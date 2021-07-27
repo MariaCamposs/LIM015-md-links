@@ -21,7 +21,8 @@ describe('Validate link', () => {
       status: 200,
       statusText: 'OK',
     }));
-    return statusLink(arr).then((res) => {
+    return statusLink(arr)
+    .then((res) => {
       expect(res).toEqual(obj);
     });
   });
@@ -43,7 +44,8 @@ describe('Validate link', () => {
       status: 404,
       statusText: 'Not Found',
     }));
-    return statusLink(arr).then((res) => {
+    return statusLink(arr)
+    .then((res) => {
       expect(res).toEqual(obj);
     });
   });
@@ -63,7 +65,8 @@ describe('Validate link', () => {
     };
     // eslint-disable-next-line prefer-promise-reject-errors
     fetch.mockImplementation(() => Promise.reject({}));
-    return statusLink(arr).catch((err) => {
+    return statusLink(arr)
+    .catch((err) => {
       expect(err).toEqual(obj);
     });
   });

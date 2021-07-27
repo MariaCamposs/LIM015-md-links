@@ -32,7 +32,7 @@ const regxText = /\[([\w\s\d.()]+)\]/g;
 
 const getLinksMd = (filePath) => {
   const linksArr = [];
-    const fileRead = fs.readFileSync(filePath, 'utf-8');
+    const fileRead = fs.readFileSync(filePath[0], 'utf-8');
     const links = fileRead.match(regx);
     if (links) {
       links.forEach((link) => {

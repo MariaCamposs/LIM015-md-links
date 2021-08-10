@@ -7,7 +7,7 @@ const statistics = (links) => {
 };
 
 const broken = (links) => {
-    const brokenLinks = Array.from(links).filter((elem) => elem.status >= 400)
+    const brokenLinks = links.filter((elem) => elem.status >= 400 || elem.status == 'no status')
     const stats = `\nBroken: ${brokenLinks.length}`;
     return stats;
 }

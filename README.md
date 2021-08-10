@@ -6,7 +6,7 @@ Md-links es una librería que permite la validación de estatus de URLs que se e
 
 Mediante npm:
 
-`$ npm i mdlinks-maria-campos`
+`$ npm i mdlinks-m-campos`
 
 Mediante repo de github:
 
@@ -15,7 +15,7 @@ Mediante repo de github:
 ## 2. Guía de uso
 
 Para acceder a `mdLinks` debemos importar con
-`const mdLinks = require('lim014-mdlinks')` 
+`const mdLinks = require('mdlinks-m-campos')` 
 
 ### 1) JavaScript API
 
@@ -53,7 +53,7 @@ Esta aplicación debe poderse puede ejecutar a través de la **terminal**:
 
 Por ejemplo:
 
-![](captures/por_defecto.png)
+![](https://github.com/MariaCamposs/LIM015-md-links/blob/main/captures/por_defecto.png?raw=true)
 
 #### Options
 
@@ -65,7 +65,7 @@ URL que responde ok, entonces consideraremos el link como ok.
 
 Por ejemplo:
 
-![](captures/validate.png)
+![](https://github.com/MariaCamposs/LIM015-md-links/blob/main/captures/validate.png?raw=true)
 
 Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de
 la URL, así como el status de la respuesta recibida a la petición HTTP a dicha
@@ -76,18 +76,18 @@ URL.
 Si pasamos la opción `--stats` el output (salida) será un texto con estadísticas
 básicas sobre los links.
 
-![](captures/stats.png)
+![](https://github.com/MariaCamposs/LIM015-md-links/blob/main/captures/stats.png?raw=true)
 
 También podemos combinar `--stats` y `--validate` para obtener estadísticas que
 necesiten de los resultados de la validación.
 
-![](captures/stats_validate.png)
+![](captures/https://github.com/MariaCamposs/LIM015-md-links/blob/main/captures/stats_validate.png?raw=true)
 ## 3. Diagramas de flujo
 
 ### API
 
-![](captures/Mdlinks.png)
+![](https://github.com/MariaCamposs/LIM015-md-links/blob/main/captures/Mdlinks.png?raw=true)
 
 ### CLI
 
-![](captures/CLI.png)
+![](https://github.com/MariaCamposs/LIM015-md-links/blob/main/captures/CLI.png?raw=true)

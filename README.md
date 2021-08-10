@@ -6,7 +6,7 @@ Md-links es una librería que permite la validación de estatus de URLs que se e
 
 Mediante npm:
 
-`$ npm i lim015-mdlinks`
+`$ npm i mdlinks-maria-campos`
 
 Mediante repo de github:
 

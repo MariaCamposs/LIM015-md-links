@@ -39,7 +39,7 @@ describe('mdlinks', () => {
     });
   
     test('returns an error when path is not valid', () => {
-      const err = 'The path is not valid.';
+      const err = "The path is not valid.";
       return mdlinks('./link.md', { validate: true }).catch((error) => {
         expect(error).toEqual(err);
       });

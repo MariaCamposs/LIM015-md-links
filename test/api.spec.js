@@ -64,10 +64,11 @@ const {absolutePath, validPath, getMdFiles, getLinksMd } = require('../src/api.j
           href: 'https://es.wikipedia.org/wiki/Markdown',
           text: 'Markdown',
           file: 'C:\\Users\\Mari\\Documents\\GitHub\\LIM015-md-links\\test\\files_test\\link.md',
-      }]
-      expect(getLinksMd('C:\\Users\\Mari\\Documents\\GitHub\\LIM015-md-links\\test\\files_test\\link.md')).toStrictEqual(result);
+      },
+    ];
+      expect(getLinksMd([`${__dirname}\\files_test\\link.md`])).toStrictEqual(result);
     })
     it('returns links of .md', () => {
-      expect(getLinksMd('C:\\Users\\Mari\\Documents\\GitHub\\LIM015-md-links\\test\\files_test\\no_link.md')).toStrictEqual([]);
+      expect(getLinksMd([`${__dirname}\\files_test\\no_link.md`])).toStrictEqual([]);
     })
 });

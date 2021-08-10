@@ -1,5 +1,5 @@
 {
-  "name": "md-links",
+  "name": "lim015-mdlinks",
   "version": "0.1.0",
   "description": "Herramienta de línea de comando que permite validar las URLs dentro de archivos markdown, a partir de la ruta que recibe como argumento, analizará el archivo e imprimirá los links que encuentre, así mismo tiene dos opciones --validate para averiguar si el link funciona y --stats para obtener estadis básicas, a la vez puede combinar --validate y --stats para obtener estadisticas de la validación",
   "main": "index.js",

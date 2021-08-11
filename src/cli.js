@@ -4,7 +4,7 @@ const { statistics, broken } = require("./stats.js");
 const mdlinks = require("./index.js");
 
 // Grab provided args.
-const [, , ...args] = process.argv.slice(2);
+const [, , ...args] = process.argv;
 const textHelp = "Intente con --stats, --validate o ambos (--stats --validate).\nEn caso de necesitar ayuda, intente con --help.";
 
 if (args.length === 1) {

@@ -6,7 +6,7 @@ Md-links es una librería que permite la validación de estatus de URLs que se e
 
 Mediante npm:
 
-`$ npm i mdlinks-m-campos`
+`$ npm i mariacampos-mdlinks`
 
 Mediante repo de github:
 
@@ -15,7 +15,7 @@ Mediante repo de github:
 ## 2. Guía de uso
 
 Para acceder a `mdLinks` debemos importar con
-`const mdLinks = require('mdlinks-m-campos')` 
+`const mdLinks = require('mariacampos-mdlinks')` 
 
 ### 1) JavaScript API
 
@@ -24,7 +24,7 @@ Esta es una promesa `mdLinks(path, options)` que recibe dos parámetros: `path` 
 #### Ejemplo (resultados como comentarios)
 
 ```js
-const mdLinks = require("md-links");
+const mdLinks = require("mariacampos-mdlinks");
 
 mdLinks("./some/example.md")
   .then((links) => {
@@ -47,7 +47,7 @@ mdLinks("./some/dir")
 
 ### 2) CLI (Command Line Interface - Interfaz de Línea de Comando)
 
-Esta aplicación debe poderse puede ejecutar a través de la **terminal**:
+Esta aplicación se puede ejecutar a través de la **terminal**:
 
 `md-links <path-to-file> [options]`
 
